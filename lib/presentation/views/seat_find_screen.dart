@@ -1,6 +1,3 @@
-//KARKALA SRINIVASA VENKATARAMANA
-//OM JAI DURGE MAA
-
 import 'package:flutter/material.dart';
 import 'package:rail_book/data/data_source.dart';
 import 'package:rail_book/data/seat_model.dart';
@@ -15,42 +12,48 @@ class FindScreen extends StatelessWidget {
     final dataSourceObj = SeatDataSource();
     SeatMatrixModel seatMatrix = dataSourceObj.getSeatMatrix();
 
-    ValueNotifier<int> selSeat = ValueNotifier<int>(0);
     ValueNotifier<List<bool>> glow =
-        ValueNotifier<List<bool>>(List.generate(32, (index) => false));
+        ValueNotifier<List<bool>>(List.generate(seatMatrix.allSeats.length - 1, (index) => false));
 
     return Scaffold(
-        body: SafeArea(
-      child: SingleChildScrollView(
-        physics: const NeverScrollableScrollPhysics(),
+      resizeToAvoidBottomInset: false,
+      body: SafeArea(
         child: Column(
           children: [
-            const SizedBox(
-              height: 20.0,
-            ),
-            Text(
-              "RailSearch",
-              style: TextStyle(
-                color: Colors.blue[200],
-                fontSize: 80,
-                letterSpacing: 1.5,
+            Flexible(
+              flex: 3,
+              child: LayoutBuilder(
+                builder: (context, constraints) => SizedBox(
+                  height: constraints.maxHeight,
+                  child: Center(
+                    child: Text(
+                      "RailSearch",
+                      style: TextStyle(
+                        color: Colors.blue[200],
+                        fontSize: MediaQuery.of(context).orientation ==
+                                Orientation.portrait
+                            ? 80
+                            : 40,
+                        letterSpacing: 1.5,
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ),
             SearchBar(
-              inputValNotifier: selSeat,
               glowArray: glow,
             ),
-            ValueListenableBuilder(
-              valueListenable: glow,
-              builder: ((context, value, child) => MatrixView(
-                    glowArray: glow,
-                    inpVal: selSeat,
-                    seatMatrix: seatMatrix,
-                  )),
-            ),
+            Flexible(
+              flex: 12,
+              child: MatrixView(
+                glowArray: glow,
+                seatMatrix: seatMatrix,
+              ),
+            )
           ],
         ),
       ),
-    ));
+    );
   }
 }

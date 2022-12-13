@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.rail_book">
    <application
-        android:label="rail_book"
+        android:label="Rail Book"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

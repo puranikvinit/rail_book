@@ -1,10 +1,7 @@
-//KARKALA SRINIVASA VENKATARAMANA
-//OM JAI DURGE MAA
-
 import 'package:flutter/material.dart';
 import 'package:rail_book/presentation/views/seat_find_screen.dart';
 
-void main() async {
+void main() {
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
